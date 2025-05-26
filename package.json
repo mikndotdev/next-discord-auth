@@ -1,28 +1,32 @@
 {
-  "name": "@mikandev/next-discord-auth",
-  "module": "dist/index.ts",
-  "types": "dist/index.d.ts",
-  "version": "0.0.4",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mikndotdev/next-discord-auth"
-  },
-  "homepage": "https://mikn.dev/solutions/developers/next-discord-auth",
-  "scripts": {
-    "build": "tsc",
-    "format": "biome format --write ."
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "@types/bun": "latest",
-    "@types/jsonwebtoken": "^9.0.9"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2",
-    "next": "^15.3.2"
-  }
+	"name": "@mikandev/next-discord-auth",
+	"module": "dist/index.ts",
+	"types": "dist/index.d.ts",
+	"main": "dist/index.js",
+	"license": "WTFPL",
+	"version": "0.0.5",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mikndotdev/next-discord-auth"
+	},
+	"homepage": "https://mikn.dev/solutions/developers/next-discord-auth",
+	"scripts": {
+		"build": "tsc",
+		"format": "biome format --write .",
+        "lint": "biome lint",
+        "lintfix": "biome lint --fix"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/bun": "latest",
+		"@types/jsonwebtoken": "^9.0.9"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"jsonwebtoken": "^9.0.2",
+		"next": "^15.3.2"
+	}
 }
