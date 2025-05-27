@@ -4,14 +4,24 @@
 	"module": "dist/index.ts",
 	"types": "dist/index.d.ts",
 	"main": "dist/index.js",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"license": "WTFPL",
 	"version": "1.0.0",
 	"type": "module",
-	"keywords": ["auth", "discord", "nextjs", "nextjs-auth", "next-discord-auth", "oauth", "oauth2"],
+	"keywords": [
+		"auth",
+		"discord",
+		"nextjs",
+		"nextjs-auth",
+		"next-discord-auth",
+		"oauth",
+		"oauth2"
+	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mikndotdev/next-discord-auth"
+		"url": "git+https://github.com/mikndotdev/next-discord-auth.git"
 	},
 	"homepage": "https://mikn.dev/solutions/developers/next-discord-auth",
 	"scripts": {
@@ -51,8 +61,12 @@
 	},
 	"typesVersions": {
 		"*": {
-			"redirect": ["dist/types/redirect.d.ts"],
-			"server-actions": ["dist/types/server-actions.d.ts"]
+			"redirect": [
+				"dist/types/redirect.d.ts"
+			],
+			"server-actions": [
+				"dist/types/server-actions.d.ts"
+			]
 		}
 	}
 }
