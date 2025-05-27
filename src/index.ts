@@ -10,9 +10,9 @@ export interface Session {
 }
 
 export interface Config {
-	clientId: string;
-	clientSecret: string;
-	scopes: string[];
+	clientId?: string;
+	clientSecret?: string;
+	scopes?: string[];
 	redirectUri: string;
 	jwtSecret: string;
 }
@@ -20,7 +20,19 @@ export interface Config {
 let globalConfig: Config | null = null;
 
 export function setup(config: Config) {
-	globalConfig = config;
+	if (!config || !config.redirectUri || !config.jwtSecret) {
+		throw new Error(
+			"Invalid configuration. 'redirectUri' and 'jwtSecret' are required.",
+		);
+	}
+	globalConfig = {
+		clientId: config.clientId || process.env.AUTH_DISCORD_ID || "",
+		clientSecret:
+			config.clientSecret || process.env.AUTH_DISCORD_SECRET || "",
+		scopes: config.scopes || ["identify", "email"],
+		redirectUri: config.redirectUri,
+		jwtSecret: config.jwtSecret,
+	};
 }
 
 export function getGlobalConfig(): Config {

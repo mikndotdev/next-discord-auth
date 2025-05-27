@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import type { Session, Config } from "./index";
+import { type Session, getGlobalConfig } from "./index";
 import jwt from "jsonwebtoken";
 
-export const getSession = async (
-	config: Config,
-	req: NextRequest,
-): Promise<Session | null> => {
+export const getSession = async (req: NextRequest): Promise<Session | null> => {
+	const config = getGlobalConfig();
 	const token = req.cookies.get("AUTH_SESSION")?.value;
 	if (!token) {
 		return null;
@@ -19,11 +17,9 @@ export const getSession = async (
 	}
 };
 
-export const signIn = async (
-	config: Config,
-	req: NextRequest,
-): Promise<NextResponse> => {
-	const session = await getSession(config, req);
+export const signIn = async (req: NextRequest): Promise<NextResponse> => {
+	const config = getGlobalConfig();
+	const session = await getSession(req);
 	if (session) {
 		return NextResponse.json(
 			{ message: "Already signed in" },
@@ -35,11 +31,9 @@ export const signIn = async (
 	return NextResponse.redirect(signInURL, 302);
 };
 
-export const signOut = async (
-	config: Config,
-	req: NextRequest,
-): Promise<NextResponse> => {
-	const session = await getSession(config, req);
+export const signOut = async (req: NextRequest): Promise<NextResponse> => {
+	const config = getGlobalConfig();
+	const session = await getSession(req);
 	if (!session) {
 		return NextResponse.json({ message: "Not signed in" }, { status: 401 });
 	}

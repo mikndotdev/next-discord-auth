@@ -1,10 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
-import type { Session, Config } from "./index";
+import { type Session, getGlobalConfig } from "./index";
 import { cookies } from "next/headers";
 import { ExchangeCodeForTokens } from "./lib/oauth";
 import jwt from "jsonwebtoken";
 
-export const handleRedirect = async (config: Config, req: NextRequest) => {
+export const handleRedirect = async (req: NextRequest) => {
+	const config = getGlobalConfig();
 	const cookieStore = await cookies();
 	const params = new URL(req.url).searchParams;
 	const code = params.get("code");
