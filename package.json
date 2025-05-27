@@ -1,11 +1,12 @@
 {
 	"name": "@mikandev/next-discord-auth",
+	"description": "Discord OAuth for Next.js that doesn't suck",
 	"module": "dist/index.ts",
 	"types": "dist/index.d.ts",
 	"main": "dist/index.js",
 	"files": ["dist"],
 	"license": "WTFPL",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"repository": {
 		"type": "git",
