@@ -1,6 +1,7 @@
-import { $ } from "bun"
+import { $ } from "bun";
 
-await $`tsc`
-await $`cp types/index.d.ts dist/index.d.ts`
+await $`tsc`;
+await $`mkdir -p dist/types`;
+await $`cp types/*.d.ts dist/types/`;
 
 console.log("Build completed successfully!");

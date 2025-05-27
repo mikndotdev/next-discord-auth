@@ -33,11 +33,23 @@ export function setup(config: Config) {
 		}
 	}
 	if (globalConfig) {
-		console.warn("Global config is already set. Overwriting existing config.");
+		console.warn(
+			"Global config is already set. Overwriting existing config.",
+		);
 	}
 	globalConfig = {
-		clientId: config.clientId ?? process.env.AUTH_DISCORD_ID ?? (() => { throw new Error("clientId is required"); })(),
-		clientSecret: config.clientSecret ?? process.env.AUTH_DISCORD_SECRET ?? (() => { throw new Error("clientSecret is required"); })(),
+		clientId:
+			config.clientId ??
+			process.env.AUTH_DISCORD_ID ??
+			(() => {
+				throw new Error("clientId is required");
+			})(),
+		clientSecret:
+			config.clientSecret ??
+			process.env.AUTH_DISCORD_SECRET ??
+			(() => {
+				throw new Error("clientSecret is required");
+			})(),
 		scopes: config.scopes ?? ["identify", "email"],
 		redirectUri: config.redirectUri,
 		jwtSecret: config.jwtSecret,
