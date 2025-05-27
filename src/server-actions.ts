@@ -42,10 +42,5 @@ export const signOut = async (): Promise<NextResponse> => {
 		return NextResponse.json({ message: "Invalid session" }, { status: 401 });
 	}
 
-	const response = NextResponse.json(
-		{ message: "Signed out successfully" },
-		{ status: 200 }
-	);
-	response.cookies.delete("AUTH_SESSION");
-	return response;
+	cookieStore.delete("AUTH_SESSION");
 };
