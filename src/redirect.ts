@@ -37,13 +37,11 @@ export const handleRedirect = async (req: NextRequest) => {
 	}
 
 	const userData = (await sessionData.json()) as {
-		user: {
-			id: string;
-			username: string;
-			discriminator: string;
-			avatar: string | null;
-			email?: string;
-		};
+		id: string;
+		username: string;
+		discriminator: string;
+		avatar: string | null;
+		email?: string;
 	};
 
 	const session: Session = {
