@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { type Session, getGlobalConfig } from "./index";
 import jwt from "jsonwebtoken";
 
@@ -17,14 +18,14 @@ export const getSession = async (): Promise<Session | null> => {
 	}
 };
 
-export const signIn = async (req: NextRequest): Promise<NextResponse> => {
+export const signIn = async (): Promise<NextResponse> => {
 	const config = getGlobalConfig();
 	const session = await getSession();
 	if (session) {
 		return NextResponse.json({ message: "Already signed in" }, { status: 200 });
 	}
 	const signInURL = `https://discord.com/api/oauth2/authorize?client_id=${config.clientId}&redirect_uri=${encodeURIComponent(config.redirectUri)}&response_type=code&scope=${config.scopes.join(" ")}`;
-	return NextResponse.redirect(signInURL, 302);
+	return redirect(signInURL);
 };
 
 export const signOut = async (): Promise<NextResponse> => {
