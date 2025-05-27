@@ -46,10 +46,12 @@ export const handleRedirect = async (req: NextRequest) => {
 
 	const session: Session = {
 		user: {
-			id: userData.user.id,
-			name: `${userData.user.username}#${userData.user.discriminator}`,
-			email: userData.user.email,
-			avatar: `https://cdn.discordapp.com/avatars/${userData.user.id}/${userData.user.avatar}.png`,
+			id: userData.id,
+			name: `${userData.username}`,
+			email: userData.email,
+			avatar: userData.avatar
+				? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`
+				: null,
 		},
 		expires: new Date(Date.now() + response.expiresIn * 1000).toISOString(),
 	};
