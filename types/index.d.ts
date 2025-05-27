@@ -1,0 +1,1 @@
+declare module '@mikandev/next-discord-auth';
