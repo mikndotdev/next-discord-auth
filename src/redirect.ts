@@ -49,7 +49,7 @@ export const handleRedirect = async (config: Config, req: NextRequest) => {
 		user: {
 			id: userData.user.id,
 			name: `${userData.user.username}#${userData.user.discriminator}`,
-			email: userData.user.email || null,
+			email: userData.user.email,
 			avatar: `https://cdn.discordapp.com/avatars/${userData.user.id}/${userData.user.avatar}.png`,
 		},
 		expires: new Date(Date.now() + response.expiresIn * 1000).toISOString(),
