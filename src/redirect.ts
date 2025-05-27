@@ -58,5 +58,5 @@ export const handleRedirect = async (req: NextRequest) => {
 		expiresIn: response.expiresIn,
 	});
 
-	await cookieStore.set("AUTH_SESSION", token);
+	cookieStore.set("AUTH_SESSION", token, { sameSite: "strict", httpOnly: true, secure: true });
 };
