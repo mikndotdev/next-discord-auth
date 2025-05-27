@@ -5,7 +5,7 @@
 	"main": "dist/index.js",
 	"files": ["dist"],
 	"license": "WTFPL",
-	"version": "0.0.9",
+	"version": "0.1.0",
 	"type": "module",
 	"repository": {
 		"type": "git",
@@ -13,7 +13,7 @@
 	},
 	"homepage": "https://mikn.dev/solutions/developers/next-discord-auth",
 	"scripts": {
-		"build": "tsc",
+		"build": "bun build.ts",
 		"format": "biome format --write .",
 		"lint": "biome lint",
 		"lintfix": "biome lint --fix"

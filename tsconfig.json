@@ -25,5 +25,7 @@
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"noPropertyAccessFromIndexSignature": false
-	}
+	},
+	"include": ["src"],
+	"exclude": ["build.ts", "dist", "node_modules", "types"]
 }
