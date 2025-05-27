@@ -6,8 +6,9 @@
 	"main": "dist/index.js",
 	"files": ["dist"],
 	"license": "WTFPL",
-	"version": "0.1.5",
+	"version": "1.0.0",
 	"type": "module",
+	"keywords": ["auth", "discord", "nextjs", "nextjs-auth", "next-discord-auth", "oauth", "oauth2"],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/mikndotdev/next-discord-auth"

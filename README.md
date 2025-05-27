@@ -1,15 +1,32 @@
-# next-discord-auth
+# Next Discord Auth
 
-To install dependencies:
+<p align="center">
+ <img src="https://cdn.mikn.dev/branding/mikan-vtube.svg" width="100">
+</p>
+
+<p align="center">JWT-based Discord authentication for Next.js that doesn't suck</p>
+
+- Works with Next.js 15
+- No database required
+- Returns **all** user data from Discord
+- Fully server-side
+- Support for Server Actions and Route Handlers
+- Designed for easy migration from AuthJS
+
+## Installation
 
 ```bash
-bun install
+npm install @mikandev/next-discord-auth
 ```
 
-To run:
+## Demo
+You can see a live demo of this package in action at <br>
+[https://next-discord-auth-demo.maamokun.workers.dev](https://next-discord-auth-demo.maamokun.workers.dev)
 
-```bash
-bun run index.ts
-```
+## Open Source
+This package is open source and available under the [WTFPL License](https://wtfpl.net/).<br>
+Feel free to [contribute](https://github.com/mikndotdev/next-discord-auth) or use it in your projects!
 
-This project was created using `bun init` in bun v1.2.8. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+## Learn More
+- [Documentation](https://docs.mikn.dev/solutions/developers/next-discord-auth)
+- [Product Page](https://mikn.dev/solutions/developers/next-discord-auth)
