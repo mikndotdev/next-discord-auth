@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { type Session, getGlobalConfig } from "./index";
@@ -18,9 +19,13 @@ export const getSession = async (): Promise<Session | null> => {
 	}
 };
 
-export const signIn = async (): Promise<NextResponse> => {
+export const signIn = async (redirectTo?: string): Promise<NextResponse> => {
 	const config = getGlobalConfig();
 	const session = await getSession();
+	const cookieStore = await cookies();
+	const headersList = await headers();
+	const redirectUri = redirectTo ?? headersList.get("Referer") ?? "/";
+	await cookieStore.set("REDIRECT_AFTER", redirectUri, { sameSite: "lax", httpOnly: true, secure: true });
 	if (session) {
 		return NextResponse.json({ message: "Already signed in" }, { status: 200 });
 	}

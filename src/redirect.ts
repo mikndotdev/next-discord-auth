@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 import { type Session, getGlobalConfig } from "./index";
 import { cookies } from "next/headers";
 import { ExchangeCodeForTokens } from "./lib/oauth";
@@ -58,5 +59,10 @@ export const handleRedirect = async (req: NextRequest) => {
 		expiresIn: response.expiresIn,
 	});
 
+	const redirectUri = cookieStore.get("REDIRECT_AFTER")?.value || "/";
+
 	cookieStore.set("AUTH_SESSION", token, { sameSite: "lax", httpOnly: true, secure: true });
+	cookieStore.delete("REDIRECT_AFTER");
+
+	return redirect(redirectUri)
 };
