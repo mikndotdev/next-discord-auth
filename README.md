@@ -30,3 +30,6 @@ Feel free to [contribute](https://github.com/mikndotdev/next-discord-auth) or us
 ## Learn More
 - [Documentation](https://docs.mikn.dev/solutions/developers/next-discord-auth)
 - [Product Page](https://mikn.dev/solutions/developers/next-discord-auth)
+
+## Pitch Video
+[![thumbnail](https://img.youtube.com/vi/ZBc05iHwoPA/maxresdefault.jpg)](https://www.youtube.com/watch?v=ZBc05iHwoPA)
