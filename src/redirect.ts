@@ -53,6 +53,8 @@ export const handleRedirect = async (req: NextRequest) => {
 			avatar: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`
 		},
 		expires: new Date(Date.now() + response.expiresIn * 1000).toISOString(),
+		accessToken: response.accessToken,
+		refreshToken: response.refreshToken,
 	};
 
 	const token = jwt.sign(session, config.jwtSecret, {

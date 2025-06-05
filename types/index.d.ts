@@ -7,6 +7,7 @@ export interface Session {
 	};
 	expires: string;
 	accessToken?: string;
+	refreshToken?: string;
 }
 
 export interface Config {

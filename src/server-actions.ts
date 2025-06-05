@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { type Session, getGlobalConfig } from "./index";
+import { RefreshAccessToken } from "./lib/oauth";
 import jwt from "jsonwebtoken";
 
 export const getSession = async (): Promise<Session | null> => {
@@ -12,7 +13,28 @@ export const getSession = async (): Promise<Session | null> => {
 	if (!token) return null;
 
 	try {
-		return jwt.verify(token, config.jwtSecret) as Session;
+		const session = jwt.verify(token, config.jwtSecret) as Session;
+		if (session.expires) {
+			const expiresAt = new Date(session.expires);
+			if (expiresAt < new Date()) {
+				cookieStore.delete("AUTH_SESSION");
+				return null;
+			} else {
+				const timeUntilExpiration = expiresAt.getTime() - Date.now();
+				if (timeUntilExpiration < 5 * 60 * 1000) { // less than 5 minutes
+					const refreshedSession = await RefreshAccessToken(config, session.refreshToken || "");
+					if (refreshedSession) {
+						session.accessToken = refreshedSession.accessToken;
+						session.refreshToken = refreshedSession.refreshToken;
+						session.expires = new Date(Date.now() + refreshedSession.expiresIn * 1000).toISOString();
+						const newToken = jwt.sign(session, config.jwtSecret);
+						cookieStore.set("AUTH_SESSION", newToken, { sameSite: "lax", httpOnly: true, secure: true });
+					}
+				}
+				return session;
+			}
+		}
+		return null;
 	} catch (error) {
 		console.error("Invalid token:", error);
 		return null;
