@@ -8,7 +8,7 @@
 		"dist"
 	],
 	"license": "WTFPL",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"type": "module",
 	"keywords": [
 		"auth",
@@ -40,7 +40,7 @@
 	},
 	"dependencies": {
 		"jsonwebtoken": "^9.0.2",
-		"next": "^15.3.2"
+		"next": "^15.5.4"
 	},
 	"exports": {
 		".": {
