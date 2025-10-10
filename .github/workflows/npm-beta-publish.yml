@@ -1,0 +1,31 @@
+name: Publish to NPM (Beta branches)
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    branches:
+      - 'beta/**'
+      - 'next/**'
+      - 'canary/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+      - uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+      - name: Build Project
+        run: bun run build
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: "public"
+          provenance: true
+          tag: "beta"
