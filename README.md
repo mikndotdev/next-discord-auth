@@ -6,7 +6,7 @@
 
 <p align="center">JWT-based Discord authentication for Next.js that doesn't suck</p>
 
-- Works with Next.js 15
+- Works with Next.js 16
 - No database required
 - Returns **all** user data from Discord
 - Fully server-side
