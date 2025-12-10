@@ -1,18 +1,17 @@
-import { type NextRequest, NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import { type Session, getGlobalConfig } from "./index";
 import { cookies } from "next/headers";
 import { ExchangeCodeForTokens } from "./lib/oauth";
 import jwt from "jsonwebtoken";
 
-export const handleRedirect = async (req: NextRequest) => {
+export const handleRedirect = async (req: Request) => {
 	const config = getGlobalConfig();
 	const cookieStore = await cookies();
 	const params = new URL(req.url).searchParams;
 	const code = params.get("code");
 
 	if (!code) {
-		return NextResponse.json(
+		return Response.json(
 			{ error: "Authorization code not found" },
 			{ status: 400 },
 		);
@@ -31,7 +30,7 @@ export const handleRedirect = async (req: NextRequest) => {
 			error?: string;
 			message?: string;
 		};
-		return NextResponse.json(
+		return Response.json(
 			{ error: error.message || "Failed to fetch user data" },
 			{ status: 500 },
 		);

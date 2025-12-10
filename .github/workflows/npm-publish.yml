@@ -20,8 +20,7 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Build Project
         run: bun run build
-      - uses: JS-DevTools/npm-publish@v3
+      - uses: JS-DevTools/npm-publish@v4
         with:
-          token: ${{ secrets.NPM_TOKEN }}
           access: "public"
           provenance: true
