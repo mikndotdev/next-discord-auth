@@ -1,3 +1,1 @@
-export declare function handleRedirect(
-	req: Request,
-): Promise<Response | void>;
+export declare function handleRedirect(req: Request): Promise<Response | void>;

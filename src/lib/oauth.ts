@@ -39,7 +39,10 @@ export const ExchangeCodeForTokens = async (config: Config, code: string) => {
 	};
 };
 
-export const RefreshAccessToken = async (config: Config, refreshToken: string) => {
+export const RefreshAccessToken = async (
+	config: Config,
+	refreshToken: string,
+) => {
 	const response = await fetch("https://discord.com/api/oauth2/token", {
 		method: "POST",
 		headers: {
@@ -75,4 +78,4 @@ export const RefreshAccessToken = async (config: Config, refreshToken: string) =
 		refreshToken: data.refresh_token || refreshToken,
 		expiresIn: data.expires_in,
 	};
-}
+};

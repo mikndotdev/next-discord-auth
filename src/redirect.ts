@@ -49,7 +49,7 @@ export const handleRedirect = async (req: Request) => {
 			id: userData.id,
 			name: `${userData.username}`,
 			email: userData.email,
-			avatar: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`
+			avatar: `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png`,
 		},
 		expires: new Date(Date.now() + response.expiresIn * 1000).toISOString(),
 		accessToken: response.accessToken,
@@ -62,8 +62,12 @@ export const handleRedirect = async (req: Request) => {
 
 	const redirectUri = cookieStore.get("REDIRECT_AFTER")?.value || "/";
 
-	cookieStore.set("AUTH_SESSION", token, { sameSite: "lax", httpOnly: true, secure: true });
+	cookieStore.set("AUTH_SESSION", token, {
+		sameSite: "lax",
+		httpOnly: true,
+		secure: true,
+	});
 	cookieStore.delete("REDIRECT_AFTER");
 
-	return redirect(redirectUri)
+	return redirect(redirectUri);
 };

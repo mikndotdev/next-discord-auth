@@ -20,14 +20,24 @@ export const getSession = async (): Promise<Session | null> => {
 				return null;
 			} else {
 				const timeUntilExpiration = expiresAt.getTime() - Date.now();
-				if (timeUntilExpiration < 5 * 60 * 1000) { // less than 5 minutes
-					const refreshedSession = await RefreshAccessToken(config, session.refreshToken || "");
+				if (timeUntilExpiration < 5 * 60 * 1000) {
+					// less than 5 minutes
+					const refreshedSession = await RefreshAccessToken(
+						config,
+						session.refreshToken || "",
+					);
 					if (refreshedSession) {
 						session.accessToken = refreshedSession.accessToken;
 						session.refreshToken = refreshedSession.refreshToken;
-						session.expires = new Date(Date.now() + refreshedSession.expiresIn * 1000).toISOString();
+						session.expires = new Date(
+							Date.now() + refreshedSession.expiresIn * 1000,
+						).toISOString();
 						const newToken = jwt.sign(session, config.jwtSecret);
-						cookieStore.set("AUTH_SESSION", newToken, { sameSite: "lax", httpOnly: true, secure: true });
+						cookieStore.set("AUTH_SESSION", newToken, {
+							sameSite: "lax",
+							httpOnly: true,
+							secure: true,
+						});
 					}
 				}
 				return session;
@@ -46,7 +56,11 @@ export const signIn = async (redirectTo?: string): Promise<Response> => {
 	const cookieStore = await cookies();
 	const headersList = await headers();
 	const redirectUri = redirectTo ?? headersList.get("Referer") ?? "/";
-	await cookieStore.set("REDIRECT_AFTER", redirectUri, { sameSite: "lax", httpOnly: true, secure: true });
+	await cookieStore.set("REDIRECT_AFTER", redirectUri, {
+		sameSite: "lax",
+		httpOnly: true,
+		secure: true,
+	});
 	if (session) {
 		return Response.json({ message: "Already signed in" }, { status: 200 });
 	}
@@ -63,5 +77,8 @@ export const signOut = async (): Promise<Response> => {
 
 	cookieStore.delete("AUTH_SESSION");
 
-	return Response.json({ message: "Signed out successfully" }, { status: 200 });
+	return Response.json(
+		{ message: "Signed out successfully" },
+		{ status: 200 },
+	);
 };

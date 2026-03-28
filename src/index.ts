@@ -10,6 +10,8 @@ export interface Session {
 	refreshToken?: string;
 }
 
+export type ClientSession = Omit<Session, "accessToken" | "refreshToken">;
+
 export interface Config {
 	clientId: string;
 	clientSecret: string;
