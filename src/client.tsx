@@ -1,7 +1,6 @@
 "use client";
 
 import { type ClientSession } from "./index";
-import { getSession } from "./server-actions";
 import { createContext, useContext, type ReactNode } from "react";
 import useSWR from "swr";
 
@@ -66,16 +65,3 @@ export function useUserInfo() {
 
 	return context;
 }
-
-export const createSessionProviderRoute = () => {
-	return async (_request: Request) => {
-		const session = await getSession();
-
-		if (!session) {
-			return Response.json({ error: "Not logged in" }, { status: 401 });
-		} else {
-			const { accessToken, refreshToken, ...clientSession } = session;
-			return Response.json(clientSession);
-		}
-	};
-};

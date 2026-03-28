@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { type Session, getGlobalConfig } from "./index";
+import { type Session, type ClientSession, getGlobalConfig } from "./index";
 import { RefreshAccessToken } from "./lib/oauth";
 import jwt from "jsonwebtoken";
 
@@ -81,4 +81,17 @@ export const signOut = async (): Promise<Response> => {
 		{ message: "Signed out successfully" },
 		{ status: 200 },
 	);
+};
+
+export const createSessionProviderRoute = async (
+	_request: Request,
+): Promise<Response> => {
+	const session = await getSession();
+
+	if (!session) {
+		return Response.json({ error: "Not logged in" }, { status: 401 });
+	} else {
+		const { accessToken, refreshToken, ...clientSession } = session;
+		return Response.json(clientSession);
+	}
 };

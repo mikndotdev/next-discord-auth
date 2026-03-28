@@ -14,7 +14,3 @@ export declare function UserInfoProvider(props: {
 }): JSX.Element;
 
 export declare function useUserInfo(): UserInfoContextType;
-
-export declare function createSessionProviderRoute(
-	request: Request,
-): Promise<Response>;
