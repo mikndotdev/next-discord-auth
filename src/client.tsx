@@ -4,7 +4,6 @@ import { type ClientSession } from "./index";
 import { getSession } from "./server-actions";
 import { createContext, useContext, type ReactNode } from "react";
 import useSWR from "swr";
-import { NextRequest, NextResponse } from "next/server";
 
 interface UserInfoContextType {
 	session: ClientSession | null;
@@ -69,14 +68,14 @@ export function useUserInfo() {
 }
 
 export const createSessionProviderRoute = () => {
-	return async (_request: NextRequest) => {
+	return async (_request: Request) => {
 		const session = await getSession();
 
 		if (!session) {
-			return NextResponse.json({ error: "Not logged in" });
+			return Response.json({ error: "Not logged in" }, { status: 401 });
 		} else {
 			const { accessToken, refreshToken, ...clientSession } = session;
-			return NextResponse.json(clientSession);
+			return Response.json(clientSession);
 		}
 	};
 };

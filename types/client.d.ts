@@ -1,6 +1,5 @@
 import type { ClientSession } from "./index";
 import type { ReactNode } from "react";
-import type { NextRequest } from "next/server";
 
 interface UserInfoContextType {
 	session: ClientSession | null;
@@ -17,5 +16,5 @@ export declare function UserInfoProvider(props: {
 export declare function useUserInfo(): UserInfoContextType;
 
 export declare function createSessionProviderRoute(
-	request: NextRequest,
+	request: Request,
 ): Promise<Response>;
